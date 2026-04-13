@@ -1,0 +1,36 @@
+name: NotionSchedule
+targets:
+  NotionSchedule:
+    type: application
+    platform: iOS
+    deploymentTarget: "26.3.1"
+    sources:
+      - App
+      - Shared
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.NotionSchedule
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        DEVELOPMENT_TEAM: "" # TODO: 開発時に証明書の設定が必要です
+        CODE_SIGN_ENTITLEMENTS: App/NotionSchedule.entitlements
+    dependencies:
+      - target: NotionScheduleWidget
+
+  NotionScheduleWidget:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "26.3.1"
+    sources:
+      - Widget
+      - Shared
+    info:
+      path: Widget/Info.plist
+      properties:
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.NotionSchedule.Widget
+        DEVELOPMENT_TEAM: ""
+        CODE_SIGN_ENTITLEMENTS: Widget/NotionScheduleWidget.entitlements
